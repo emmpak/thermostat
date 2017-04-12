@@ -48,4 +48,11 @@ describe("Thermostat", function(){
       }).toThrowError("Cannot go below 10 degrees");
     });
   });
+
+  describe('reset', function(){
+    it('brings the temperature to 20 degrees', function(){
+      thermostat.reset();
+      expect(thermostat.temperature).toEqual(20);
+    });
+  });
 });
