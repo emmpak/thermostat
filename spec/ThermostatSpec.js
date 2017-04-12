@@ -9,7 +9,7 @@ describe("Thermostat", function(){
   });
 
   it("initializes with power saving mode on", function() {
-    expect(thermostat.saveMode).toBe(true);
+    expect(thermostat.saveMode).toEqual('On');
   });
 
   it("initializes with medium usage", function() {
@@ -102,10 +102,15 @@ describe("Thermostat", function(){
     });
   });
 
-  // describe('changeMode', function(){
-  //   it('changes the save mode from true to false', function(){
-  //     thermostat.changeMode
-  //     expect(thermostat.saveMode).toBe(false)
-  //   });
-  // });
+  describe('changeMode', function(){
+    it('changes the save mode from true to false', function(){
+      thermostat.changeMode()
+      expect(thermostat.saveMode).toEqual('Off')
+    });
+    it('changes the save mode from false to true', function(){
+      thermostat.changeMode()
+      thermostat.changeMode()
+      expect(thermostat.saveMode).toEqual('On')
+    });
+  });
 });

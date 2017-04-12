@@ -1,6 +1,6 @@
 function Thermostat(){
   this.temperature = 20;
-  this.saveMode = true;
+  this.saveMode = 'On';
   this.usage = 'Medium usage'
 }
 
@@ -9,9 +9,9 @@ Thermostat.prototype.getTemperature = function() {
 }
 
 Thermostat.prototype.increase = function() {
-  if(this.temperature <= 24 && this.saveMode == true){
+  if(this.temperature <= 24 && this.saveMode == 'On'){
     this.temperature += 1;
-  } else if(this.temperature <= 31 && this.saveMode == false) {
+  } else if(this.temperature <= 31 && this.saveMode == 'Off') {
     this.temperature +=1;
   } else {
     throw new Error("Max temperature reached on the current mode");
@@ -44,7 +44,9 @@ Thermostat.prototype.setUsage = function() {
 }
 
 Thermostat.prototype.changeMode = function() {
-  if (this.saveMode === true) {
-    this.saveMode = false;
+  if (this.saveMode === 'On') {
+    this.saveMode = 'Off';
+  } else {
+    this.saveMode = 'On';
   }
 }

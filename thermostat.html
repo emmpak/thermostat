@@ -8,10 +8,13 @@
     <section>
       <h1> Thermostat </h1>
       <h2 id='temperature'></h2>
+      <h2>Power Save</h2>
+      <p id='mode'></p>
+      <h2 id='usage'></h2>
       <button id='Up'> Up </button>
       <button id='Down'> Down </button>
-      <button id='Mode'> Change Mode </button>
-      <button id='Usage'> Display Usage </button>
+      <button id='modeButton'> Change Mode </button>
+      <!-- <button id='usageButton'> Display Usage </button> -->
       <button id='Reset'> Reset </button>
         </section>
 
@@ -21,14 +24,26 @@
       <script>
       $( document ).ready(function(){
         var thermostat = new Thermostat();
-        $( "h2" ).text(thermostat.temperature);
+        $( "#temperature" ).text(thermostat.temperature);
+        $( "#mode" ).text(thermostat.saveMode);
+        $( "#usage").text(thermostat.usage);
         $( "#Up" ).click( function() {
           thermostat.increase()
-          $( "h2" ).text(thermostat.temperature);
+          $( "#temperature" ).text(thermostat.temperature);
+          $( "#usage").text(thermostat.usage);
         });
         $( "#Down" ).click( function() {
           thermostat.decrease()
-          $( "h2" ).text(thermostat.temperature);
+          $( "#temperature" ).text(thermostat.temperature);
+          $( "#usage").text(thermostat.usage);
+        });
+        $( "#Reset").click( function() {
+          thermostat.reset()
+          $( "#temperature" ).text(thermostat.temperature);
+        })
+        $( '#modeButton').click( function() {
+          thermostat.changeMode();
+          $( "#mode" ).text(thermostat.saveMode);
         });
       });
       </script>
