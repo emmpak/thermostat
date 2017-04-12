@@ -8,10 +8,21 @@ describe("Thermostat", function(){
     expect(thermostat.temperature).toEqual(20);
   });
 
+  it("initializes with power saving mode on", function() {
+    expect(thermostat.saveMode).toBe(true);
+  });
+
   describe('increase', function(){
     it('raises the temperature', function(){
       thermostat.increase();
       expect(thermostat.temperature).toBeGreaterThan(20);
+    });
+
+    it('cannot increase temperature above 25 if save mode is on', function(){
+      thermostat.temperature = 25;
+      expect(function(){
+        thermostat.increase()
+      }).toThrowError("Save mode is on. Cannot go above 25 degrees.");
     });
   });
 
