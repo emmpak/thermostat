@@ -18,7 +18,15 @@ describe("Thermostat", function(){
   describe('decrease', function(){
     it('lowers the temperature', function(){
       thermostat.decrease();
-      expect(thermostat.temperature).toBeLessThan(20)
+      expect(thermostat.temperature).toBeLessThan(20);
+    });
+    it('cannot lower temperature below 10 degrees', function() {
+      for(var i=0; i<10; i++) {
+        thermostat.decrease();
+      }
+      expect(function(){
+        thermostat.decrease();
+      }).toThrowError("Cannot go below 10 degrees");
     });
   });
 });
