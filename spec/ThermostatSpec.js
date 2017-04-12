@@ -12,6 +12,10 @@ describe("Thermostat", function(){
     expect(thermostat.saveMode).toBe(true);
   });
 
+  it("initializes with medium usage", function() {
+    expect(thermostat.usage).toEqual('Medium usage');
+  });
+
   describe('increase', function(){
     it('raises the temperature', function(){
       thermostat.increase();
@@ -32,6 +36,12 @@ describe("Thermostat", function(){
         thermostat.increase()
       }).toThrowError("Max temperature reached on the current mode");
     });
+
+    it('sets the usage', function() {
+      spyOn(thermostat, "setUsage");
+      thermostat.increase();
+      expect(thermostat.setUsage).toHaveBeenCalled(); // expect the function to be called; do not invoke the function with ()
+    });
   });
 
   describe('decrease', function(){
@@ -47,12 +57,42 @@ describe("Thermostat", function(){
         thermostat.decrease();
       }).toThrowError("Cannot go below 10 degrees");
     });
+
+    it('sets the usage', function() {
+      spyOn(thermostat, "setUsage");
+      thermostat.decrease();
+      expect(thermostat.setUsage).toHaveBeenCalled();
+    });
   });
+
 
   describe('reset', function(){
     it('brings the temperature to 20 degrees', function(){
       thermostat.reset();
       expect(thermostat.temperature).toEqual(20);
+    });
+  });
+
+  describe('setUsage', function() {
+    it('returns low usage if temperature is below 18', function() {
+      thermostat.temperature = 17;
+      thermostat.setUsage();
+      expect(thermostat.usage).toEqual('Low usage');
+    });
+
+    it('returns medium usage', function() {
+      thermostat.temperature = 25;
+      thermostat.setUsage();
+      expect(thermostat.usage).toEqual('High usage');
+      thermostat.temperature = 23;
+      thermostat.setUsage();
+      expect(thermostat.usage).toEqual('Medium usage');
+    });
+
+    it('returns high usage', function() {
+      thermostat.temperature = 25;
+      thermostat.setUsage();
+      expect(thermostat.usage).toEqual('High usage');
     });
   });
 });
