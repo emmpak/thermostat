@@ -22,7 +22,15 @@ describe("Thermostat", function(){
       thermostat.temperature = 25;
       expect(function(){
         thermostat.increase()
-      }).toThrowError("Save mode is on. Cannot go above 25 degrees.");
+      }).toThrowError("Max temperature reached on the current mode");
+    });
+
+    it('cannot increase temperature above 32 if save mode is off', function() {
+      thermostat.saveMode = false;
+      thermostat.temperature = 32;
+      expect(function() {
+        thermostat.increase()
+      }).toThrowError("Max temperature reached on the current mode");
     });
   });
 

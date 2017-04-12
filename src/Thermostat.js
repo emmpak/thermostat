@@ -4,10 +4,12 @@ function Thermostat(){
 }
 
 Thermostat.prototype.increase = function() {
-  if(this.temperature <= 24){
-      this.temperature += 1;
+  if(this.temperature <= 24 && this.saveMode == true){
+    this.temperature += 1;
+  } else if(this.temperature <= 31 && this.saveMode == false) {
+    this.temperature +=1;
   } else {
-    throw new Error("Save mode is on. Cannot go above 25 degrees.")
+    throw new Error("Max temperature reached on the current mode")
   }
 }
 
