@@ -16,6 +16,9 @@
       <button id='modeButton'> Change Mode </button>
       <!-- <button id='usageButton'> Display Usage </button> -->
       <button id='Reset'> Reset </button>
+      <p>
+        Outside Temperature: <span id='weather'></span> C
+      </p>
         </section>
 
         <script src='jquery.js'></script>
@@ -23,6 +26,11 @@
 
       <script>
       $( document ).ready(function(){
+
+        $.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric', function(data) {
+          $( "#weather" ).text(data.main.temp)
+        });
+
         var thermostat = new Thermostat();
         $( "#temperature" ).text(thermostat.temperature);
         $( "#mode" ).text(thermostat.saveMode);
