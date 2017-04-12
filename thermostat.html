@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Thermostat </title>
+  </head>
+
+  <body>
+    <section>
+      <h1> Thermostat </h1>
+      <h2 id='temperature'></h2>
+      <button id='Up'> Up </button>
+      <button id='Down'> Down </button>
+      <button id='Mode'> Change Mode </button>
+      <button id='Usage'> Display Usage </button>
+      <button id='Reset'> Reset </button>
+        </section>
+
+        <script src='jquery.js'></script>
+      <script src='src/Thermostat.js'></script>
+
+      <script>
+      $( document ).ready(function(){
+        var thermostat = new Thermostat();
+        $( "h2" ).text(thermostat.temperature);
+        $( "#Up" ).click( function() {
+          thermostat.increase()
+          $( "h2" ).text(thermostat.temperature);
+        });
+        $( "#Down" ).click( function() {
+          thermostat.decrease()
+          $( "h2" ).text(thermostat.temperature);
+        });
+      });
+      </script>
+  </body>
+
+</html>
