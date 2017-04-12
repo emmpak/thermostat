@@ -19,7 +19,14 @@
       <p>
         Outside Temperature: <span id='weather'></span> C
       </p>
-        </section>
+      <select id='city'>
+        <option>Select</option>
+        <option value='Manchester'>Manchester</option>
+        <option value='Juneau'>Juneau</option>
+        <option value='Cairo'>Cairo</option>
+        <option value='London'>London</option>
+      </select>
+    </section>
 
         <script src='jquery.js'></script>
       <script src='src/Thermostat.js'></script>
@@ -27,9 +34,13 @@
       <script>
       $( document ).ready(function(){
 
-        $.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric', function(data) {
-          $( "#weather" ).text(data.main.temp)
-        });
+
+        $('#city').change(function() {
+          var city = $('#city').val();
+          $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city +',uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed&units=metric', function(data) {
+            $( "#weather" ).text(data.main.temp);
+          });
+        })
 
         var thermostat = new Thermostat();
         $( "#temperature" ).text(thermostat.temperature);
