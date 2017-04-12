@@ -95,4 +95,17 @@ describe("Thermostat", function(){
       expect(thermostat.usage).toEqual('High usage');
     });
   });
+
+  describe('getTemperature', function(){
+    it('returns the current temperature', function(){
+      expect(thermostat.getTemperature()).toEqual(20);
+    });
+  });
+
+  // describe('changeMode', function(){
+  //   it('changes the save mode from true to false', function(){
+  //     thermostat.changeMode
+  //     expect(thermostat.saveMode).toBe(false)
+  //   });
+  // });
 });

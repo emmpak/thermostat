@@ -4,6 +4,10 @@ function Thermostat(){
   this.usage = 'Medium usage'
 }
 
+Thermostat.prototype.getTemperature = function() {
+  return this.temperature;
+}
+
 Thermostat.prototype.increase = function() {
   if(this.temperature <= 24 && this.saveMode == true){
     this.temperature += 1;
@@ -36,5 +40,11 @@ Thermostat.prototype.setUsage = function() {
   }
   else {
     this.usage = 'Medium usage';
+  }
+}
+
+Thermostat.prototype.changeMode = function() {
+  if (this.saveMode === true) {
+    this.saveMode = false;
   }
 }
